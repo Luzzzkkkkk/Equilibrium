@@ -29,8 +29,11 @@ public class Sistema
         Console.Write("Telefone: ");
         string telefone = Console.ReadLine()!;
 
+        Console.Write("Telefone: ");
+        string endereco = Console.ReadLine()!;
+
         Paciente paciente = new Paciente(
-            nome, cpf, email, senha, idade, telefone
+            nome, cpf, email, senha, idade, telefone, endereco
         );
 
         pacientes.Add(paciente);
