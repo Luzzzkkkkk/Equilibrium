@@ -1,5 +1,5 @@
 
-public class Prontuario : Paciente
+public class Prontuario
 {
     public int Id { get; set; }
     public Paciente Paciente { get; set; }

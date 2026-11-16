@@ -7,6 +7,23 @@ public class Sistema
     private List<Paciente> pacientes = new List<Paciente>();
     private List<Medico> medicos = new List<Medico>();
 
+    public Sistema()
+    {
+        // Paciente de exemplo
+        Paciente paciente = new Paciente(
+            "Maria",
+            "12345678900",
+            "maria@email.com",
+            "senha123",
+            30,
+            "1234567890",
+            "Rua Exemplo, 123"
+        );
+
+        pacientes.Add(paciente);
+    }
+
+
     public void CadastrarPaciente()
     {
         Console.WriteLine("\nCADASTRO DE PACIENTE");
