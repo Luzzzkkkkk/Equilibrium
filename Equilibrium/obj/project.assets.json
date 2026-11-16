@@ -645,11 +645,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\giovanna60895976\\OneDrive - SENAC-SC\\Documentos\\GitHub\\Equilibrium\\Equilibrium\\Equilibrium.csproj",
+      "projectUniqueName": "C:\\Users\\giovanna60895976\\OneDrive - SENAC-SC\\Documentos\\GitHub\\PI_Final\\Equilibrium\\Equilibrium.csproj",
       "projectName": "Equilibrium",
-      "projectPath": "C:\\Users\\giovanna60895976\\OneDrive - SENAC-SC\\Documentos\\GitHub\\Equilibrium\\Equilibrium\\Equilibrium.csproj",
+      "projectPath": "C:\\Users\\giovanna60895976\\OneDrive - SENAC-SC\\Documentos\\GitHub\\PI_Final\\Equilibrium\\Equilibrium.csproj",
       "packagesPath": "C:\\Users\\giovanna60895976\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\giovanna60895976\\OneDrive - SENAC-SC\\Documentos\\GitHub\\Equilibrium\\Equilibrium\\obj\\",
+      "outputPath": "C:\\Users\\giovanna60895976\\OneDrive - SENAC-SC\\Documentos\\GitHub\\PI_Final\\Equilibrium\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\giovanna60895976\\AppData\\Roaming\\NuGet\\NuGet.Config"

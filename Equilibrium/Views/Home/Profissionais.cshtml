@@ -37,12 +37,94 @@
         <header class="topo">
 
             <div>
-                <p> SEU ESPAÇO DE ACOLHIOMENTO</p>
+                <p> SEU ESPAÇO DE ACOLHIMENTO</p>
                 <h2> Profissionais </h2>
             </div>
 
-            <div class="perfil"</div>
-            <span>✧</span>
-            <span> Paciente </span>
-            
+            <div class="perfil">
+                <span>✧</span>
+                <span> Paciente </span>
+            </div>
+
         </header>
+
+        <section class="secao">
+
+            <p class="subtitulo"> CUIDADO E ACOLHIMENTO </p>
+
+            <h1> Encontre apoio profissional. </h1>
+
+            <p>
+                Conheça profissionais e encontre opções
+                de atendimento adequadas às suas necessidades.
+            </p>
+
+            <div class="card">
+                <h3> Buscar profissionais </h3>
+
+                <form method="get"
+                asp-controller="Profissionais"
+                    asp-action="Index">
+
+                    <label for="regiao"> Região </label>
+                    <input type="text"
+                           id ="regiao"
+                           name="regiao"
+                           placeholder="Digite sua Região">
+                    
+                    <label for="especialidade">
+                        Especialidade
+                    </label>
+
+                    <select id="especialidade"
+                            name="especialidade">
+                        <option value=""> Todas </option>
+                        <option value="Psicologia">
+                            Psicologia
+                        </option>
+                        <option value="Psiquiatra">
+                            Psiquiatra
+                        </option>              
+                    
+                    </select>
+
+                    <label for="genero"> Gênero </label>
+                    
+                    <select id="genero" name="genero">
+                        <option value=""> Todos </option>
+                        <option value="Feminino"> Feminino </option>
+                        <option value="Masculino"> Masculino </option>
+                    </select>
+                    
+                    <label for="disponbilidade">
+                        Disponibilidade
+                    </label>
+
+                    <select id="disponibilidade" 
+                            name="disponibilidade">
+                        <option value=""> Todas </option>
+                        <option value="Online"> Online </option>
+                        <option value="Presencial"> 
+                            Presencial
+                        </option>
+
+                    </select>
+
+                    <button type="submit">
+                        Buscar
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+        
+        <section class="secao">
+
+            <h2> Exemplo de profissionais </h2>
+
+            <div class="cards"> </div>
+
+
+        </section>
