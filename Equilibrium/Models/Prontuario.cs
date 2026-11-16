@@ -1,4 +1,3 @@
-
 public class Prontuario
 {
     public int Id { get; set; }
