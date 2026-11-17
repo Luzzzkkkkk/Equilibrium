@@ -24,37 +24,34 @@
 
 body {
     font-family: "Open Sans", sans-serif;
-    background: #F6F7FA;
-    color: #C4C3D0;
+    background: #fffaf2;
+    color: #bb8588;
 }
-
-/* ESTRUTURA PRINCIPAL */
 
 .dashboard {
     display: flex;
     min-height: 100vh;
 }
 
-/* MENU LATERAL */
 
 .sidebar {
     width: 250px;
     min-height: 100vh;
-    background: #C4C3D0;
+    background: #eee0c6;
     padding: 30px 20px;
     display: flex;
     flex-direction: column;
 }
 
 .logo {
-    color: #758399;
+    color: #bb8588;
     font-size: 23px;
     margin-bottom: 50px;
 }
 
 .menu-titulo {
     font-size: 10px;
-    color: #758399;
+    color: #bb8588;
     letter-spacing: 2px;
     margin-bottom: 18px;
 }
@@ -67,7 +64,7 @@ body {
 
 .sidebar nav a {
     text-decoration: none;
-    color: #758399;
+    color: #bb8588;
     padding: 13px;
     border-radius: 9px;
     transition: 0.2s;
@@ -75,18 +72,20 @@ body {
 
 .sidebar nav a:hover,
 .sidebar nav a.ativo {
-    background: #adabc0;
-    color: #54769D;
+    background: #dbcdb3;
+    color: #bb8588;
 }
 
 .sidebar-final {
+    text-align: center;
     margin-top: auto;
     padding: 15px 5px;
     font-size: 13px;
-    color: #718198;
+    color: #ad7477;
 }
 
 .sidebar-final a {
+    text-align: center;
     display: inline-block;
     margin-top: 10px;
     color: #718DAF;
@@ -110,7 +109,7 @@ body {
 .subtitulo {
     font-size: 10px;
     letter-spacing: 2px;
-    color: #91A1B5;
+    color: #cf9b9d;
     margin-bottom: 10px;
 }
 
