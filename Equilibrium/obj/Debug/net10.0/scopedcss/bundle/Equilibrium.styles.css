@@ -8,42 +8,12 @@ a.navbar-brand[b-399fx8j0hf] {
   word-break: break-all;
 }
 
-a[b-399fx8j0hf] {
-  color: #0077cc;
-}
-
-.btn-primary[b-399fx8j0hf] {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active[b-399fx8j0hf], .nav-pills .show > .nav-link[b-399fx8j0hf] {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.border-top[b-399fx8j0hf] {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom[b-399fx8j0hf] {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow[b-399fx8j0hf] {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy[b-399fx8j0hf] {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
 .footer[b-399fx8j0hf] {
-  position: absolute;
-  bottom: 0;
+  position: static;
   width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+  min-height: 60px;
+  padding: 18px 0;
+  white-space: normal;
+  line-height: 1.5;
+  background: #fffdf8;
 }

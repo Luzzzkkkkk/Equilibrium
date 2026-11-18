@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "Minhas consultas";
+    ViewData["PaginaAtiva"] = "Consultas";
+}
+<div class="dashboard">
+    <partial name="_Sidebar" />
+    <main class="conteudo">
+        <header class="topo"><div><p>ACOMPANHE SEU CUIDADO</p><h2>Minhas consultas</h2></div><div class="perfil"><span>✧</span><span>Paciente</span></div></header>
+        <section class="secao">
+            <h1>Seus horários, em um só lugar.</h1>
+            <article class="card"><h3>Nenhuma consulta cadastrada</h3><p>Quando houver um agendamento, você poderá acompanhá-lo por aqui.</p><a asp-action="Profissionais">Encontrar profissionais →</a></article>
+        </section>
+    </main>
+</div>

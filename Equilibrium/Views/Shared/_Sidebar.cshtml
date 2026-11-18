@@ -1,0 +1,22 @@
+@{
+    var paginaAtiva = ViewData["PaginaAtiva"] as string ?? "";
+}
+
+<aside class="sidebar">
+    <a class="logo" asp-controller="Home" asp-action="Index">EQUILIBRIUM</a>
+    <p class="menu_titulo">MENU PRINCIPAL</p>
+
+    <nav aria-label="Navegação principal">
+        <a asp-controller="Home" asp-action="Index" class="@(paginaAtiva == "Index" ? "ativo" : "")">Início</a>
+        <a asp-controller="Home" asp-action="MeuEspaco" class="@(paginaAtiva == "MeuEspaco" ? "ativo" : "")">Meu espaço</a>
+        <a asp-controller="Home" asp-action="Profissionais" class="@(paginaAtiva == "Profissionais" ? "ativo" : "")">Profissionais</a>
+        <a asp-controller="Home" asp-action="Consultas" class="@(paginaAtiva == "Consultas" ? "ativo" : "")">Minhas consultas</a>
+        <a asp-controller="Home" asp-action="BemEstar" class="@(paginaAtiva == "BemEstar" ? "ativo" : "")">Meu bem-estar</a>
+        <a asp-controller="Home" asp-action="Configuracoes" class="@(paginaAtiva == "Configuracoes" ? "ativo" : "")">Configurações</a>
+    </nav>
+
+    <div class="sidebar-final">
+        <p>Precisa conversar?</p>
+        <a asp-controller="Home" asp-action="Privacy">Acessar suporte →</a>
+    </div>
+</aside>

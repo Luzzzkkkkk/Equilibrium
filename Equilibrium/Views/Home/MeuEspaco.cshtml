@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = "Meu espaço";
+    ViewData["PaginaAtiva"] = "MeuEspaco";
+}
+<div class="dashboard">
+    <partial name="_Sidebar" />
+    <main class="conteudo">
+        <header class="topo"><div><p>SEU ESPAÇO DE ACOLHIMENTO</p><h2>Meu espaço</h2></div><div class="perfil"><span>✧</span><span>Paciente</span></div></header>
+        <section class="secao">
+            <h1>Seu espaço pessoal</h1>
+            <p>Aqui você pode acessar os recursos de cuidado do Equilibrium.</p>
+            <div class="cards">
+                <article class="card"><h3>Meu bem-estar</h3><p>Acompanhe seu momento emocional com calma.</p><a asp-action="BemEstar">Acessar →</a></article>
+                <article class="card"><h3>Minhas consultas</h3><p>Veja sua área de consultas e atendimentos.</p><a asp-action="Consultas">Acessar →</a></article>
+                <article class="card"><h3>Profissionais</h3><p>Encontre opções de apoio profissional.</p><a asp-action="Profissionais">Encontrar →</a></article>
+            </div>
+        </section>
+    </main>
+</div>

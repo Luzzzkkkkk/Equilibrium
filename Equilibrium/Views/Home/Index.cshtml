@@ -1,35 +1,15 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Início";
+    ViewData["PaginaAtiva"] = "Index";
 }
 <div class="dashboard">
-
-    <aside class="sidebar">
-
-        <h2 class="logo"> EQUILIBRIUM </h2>
-
-        <p class="menu_titulo"> MENU PRINCIPAL</p>
-
-        <nav>
-            <a href="/" class="ativo"> Início </a>
-            <a href="/" class="#"> Meu espaço </a>
-            <a href="/" class="#"> Profissionais </a>
-            <a href="/" class="#"> Minhas consultas </a>
-            <a href="/" class="#"> Meu bem-estar </a>
-            <a href="/" class="#"> Configurações </a>
-        </nav>
-
-        <div class="sidebar-final">
-            <p> Precisa conversar? </p>
-            <a href="#"> Acessar suporte →</a>
-        </div>
-
-        </aside>
+    <partial name="_Sidebar" />
 
     <main class="conteudo">
     
     <header class="topo">
             <div>
-                <p SEU ESPAÇO DE ACOLHIMENTO</p>
+                <p>SEU ESPAÇO DE ACOLHIMENTO</p>
                 <h2> Olá, Seja Bem-vindo(a)!</h2>
             </div>
         
@@ -52,7 +32,7 @@
                     e cuide de si.
                 </p>
       
-            <a href="#" class="botao">
+            <a asp-controller="Home" asp-action="Profissionais" class="botao">
                 Encontrar Profissionais
             </a>
         </div>
@@ -62,14 +42,14 @@
     <section class="secao">
             <h2> Seu espaço pessoal </h2>
             <div class="cards"> 
-                <article class="card"> 
+                <article class="card">
                     <span>✧</span>
                     <h3> Meu Bem-estar </h3>
                     <p>
                         Registre seus sentimentos e acompanhe
                         seu momento emocional.
                     </p>
-                    <a href="#"> Acessar →</a>
+                    <a asp-controller="Home" asp-action="BemEstar">Acessar →</a>
                 </article>
 
                 <article class="card">
@@ -80,7 +60,7 @@
                         as opções de atendimento.
                     </p>
         
-                    <a href="#"> Encontrar →</a>
+                    <a asp-controller="Home" asp-action="Profissionais">Encontrar →</a>
                 </article>
       
                 <article class="card">
@@ -90,7 +70,7 @@
                         Consulte seus agendamentos
                         e acompanhe seus horários.
                     </p>
-                    <a href="#"> Visualizar →</a>
+                    <a asp-controller="Home" asp-action="Consultas">Visualizar →</a>
                 </article>
       
             </div>
