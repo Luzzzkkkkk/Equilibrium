@@ -1,18 +1,19 @@
+namespace Equilibrium.Models;
+
 public class Prontuario
 {
     public int Id { get; set; }
-    public Paciente Paciente { get; set; }
-    public string Observacoes { get; set; }
-    public string DataAtendimento { get; set; }
+    public int PacienteId { get; set; }
+    public Paciente Paciente { get; set; } = null!;
+    public string Observacoes { get; set; } = string.Empty;
+    public DateTime DataAtendimento { get; set; }
 
-    public Prontuario(
-        int id,
-        Paciente paciente,
-        string observacoes,
-        string dataAtendimento)
+    public Prontuario() { }
+
+    public Prontuario(Paciente paciente, string observacoes, DateTime dataAtendimento)
     {
-        Id = id;
         Paciente = paciente;
+        PacienteId = paciente.Id;
         Observacoes = observacoes;
         DataAtendimento = dataAtendimento;
     }
