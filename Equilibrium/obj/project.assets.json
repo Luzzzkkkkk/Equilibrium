@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "targets": {
     "net10.0": {
       "BouncyCastle.Cryptography/2.6.2": {
@@ -640,19 +640,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\giovanna60895976\\.nuget\\packages\\": {}
+    "C:\\Users\\valentina60558536\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\giovanna60895976\\OneDrive - SENAC-SC\\Documentos\\GitHub\\PI_Final\\Equilibrium\\Equilibrium.csproj",
+      "projectUniqueName": "C:\\Users\\valentina60558536\\Documents\\GitHub\\PI_Final\\Equilibrium\\Equilibrium.csproj",
       "projectName": "Equilibrium",
-      "projectPath": "C:\\Users\\giovanna60895976\\OneDrive - SENAC-SC\\Documentos\\GitHub\\PI_Final\\Equilibrium\\Equilibrium.csproj",
-      "packagesPath": "C:\\Users\\giovanna60895976\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\giovanna60895976\\OneDrive - SENAC-SC\\Documentos\\GitHub\\PI_Final\\Equilibrium\\obj\\",
+      "projectPath": "C:\\Users\\valentina60558536\\Documents\\GitHub\\PI_Final\\Equilibrium\\Equilibrium.csproj",
+      "packagesPath": "C:\\Users\\valentina60558536\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\valentina60558536\\Documents\\GitHub\\PI_Final\\Equilibrium\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\giovanna60895976\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\valentina60558536\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
@@ -662,6 +662,7 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {}
         }
@@ -676,10 +677,11 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.100"
+      "SdkAnalysisLevel": "10.0.400"
     },
     "frameworks": {
       "net10.0": {
+        "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
           "MySql.EntityFrameworkCore": {
@@ -706,7 +708,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
