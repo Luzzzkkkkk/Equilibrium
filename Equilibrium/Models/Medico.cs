@@ -11,6 +11,7 @@ public class Medico : Usuarios
     public Medico(string nome, string cpf, string email, string senha, string crm, string especialidade)
         : base(nome, cpf, email, senha)
     {
+        Tipo = "Medico";
         CRM = crm;
         Especialidade = especialidade;
     }

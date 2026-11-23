@@ -1,0 +1,20 @@
+@model RedefinirSenhaViewModel
+@{ ViewData["Title"] = "Nova senha"; }
+<section class="auth-page">
+    <div class="auth-card">
+        <a class="auth-brand" asp-controller="Home" asp-action="Index">Equilibrium</a>
+        <p class="auth-eyebrow">RECUPERAÇÃO DE CONTA</p>
+        <h1>Escolha uma nova senha.</h1>
+        <p class="auth-intro">Use pelo menos 8 caracteres.</p>
+        <div asp-validation-summary="ModelOnly" class="auth-alert"></div>
+        <form asp-action="RedefinirSenha" method="post" class="auth-form">
+            <input asp-for="Email" type="hidden" /><input asp-for="Token" type="hidden" />
+            <label asp-for="NovaSenha"></label><input asp-for="NovaSenha" autocomplete="new-password" />
+            <span asp-validation-for="NovaSenha" class="field-error"></span>
+            <label asp-for="ConfirmarSenha"></label><input asp-for="ConfirmarSenha" autocomplete="new-password" />
+            <span asp-validation-for="ConfirmarSenha" class="field-error"></span>
+            <button type="submit" class="auth-button">Salvar nova senha</button>
+        </form>
+    </div>
+</section>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

@@ -1,0 +1,20 @@
+@model SolicitarRedefinicaoViewModel
+@{ ViewData["Title"] = "Redefinir senha"; }
+<section class="auth-page">
+    <div class="auth-card">
+        <a class="auth-brand" asp-controller="Home" asp-action="Index">Equilibrium</a>
+        <p class="auth-eyebrow">ACESSO À SUA CONTA</p>
+        <h1>Vamos redefinir sua senha.</h1>
+        <p class="auth-intro">Informe o e-mail cadastrado. Se a conta existir, enviaremos um link válido por 30 minutos.</p>
+        @if (TempData["Mensagem"] is string mensagem) { <div class="auth-alert success">@mensagem</div> }
+        @if (TempData["LinkDesenvolvimento"] is string link) { <div class="auth-alert dev-link">E-mail não configurado para desenvolvimento. <a href="@link">Abrir link de redefinição</a></div> }
+        <div asp-validation-summary="ModelOnly" class="auth-alert"></div>
+        <form asp-action="EsqueciSenha" method="post" class="auth-form">
+            <label asp-for="Email"></label><input asp-for="Email" autocomplete="email" />
+            <span asp-validation-for="Email" class="field-error"></span>
+            <button type="submit" class="auth-button">Enviar instruções</button>
+        </form>
+        <p class="auth-switch"><a asp-action="Login">Voltar para entrar</a></p>
+    </div>
+</section>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

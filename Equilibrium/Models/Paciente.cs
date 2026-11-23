@@ -13,6 +13,7 @@ public class Paciente : Usuarios
     public Paciente(string nome, string cpf, string email, string senha, int idade, string telefone, string endereco)
         : base(nome, cpf, email, senha)
     {
+        Tipo = "Paciente";
         Idade = idade;
         Telefone = telefone;
         Endereco = endereco;

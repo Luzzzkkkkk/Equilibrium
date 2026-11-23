@@ -1,16 +1,17 @@
 namespace Equilibrium.Models;
 
-public abstract class Usuarios
+public class Usuarios
 {
     public int Id { get; set; }
     public string Nome { get; set; } = string.Empty;
-    public string CPF { get; set; } = string.Empty;
+    public string? CPF { get; set; }
     public string Email { get; set; } = string.Empty;
     public string Senha { get; set; } = string.Empty;
+    public string Tipo { get; set; } = "Paciente";
 
-    protected Usuarios() { }
+    public Usuarios() { }
 
-    protected Usuarios(string nome, string cpf, string email, string senha)
+    public Usuarios(string nome, string? cpf, string email, string senha)
     {
         Nome = nome;
         CPF = cpf;
