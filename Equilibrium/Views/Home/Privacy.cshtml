@@ -1,24 +1,47 @@
 @{
     ViewData["Title"] = "Privacidade e suporte";
-    ViewData["PaginaAtiva"] = "Privacy";
+    ViewData["PaginaAtiva"] = "| Privacidade";
 }
 
 <div class="dashboard">
     <partial name="_Sidebar" />
+
     <main class="conteudo">
         <header class="topo">
-            <div><p>ESTAMOS AQUI PARA VOCÊ</p><h2>Privacidade e suporte</h2></div>
-            <div class="perfil"><span>✧</span><span>Paciente</span></div>
+            <div>
+                <p>SEU ESPAÇO DE ACOLHIMENTO</p>
+                <h2>Privacidade e suporte</h2>
+            </div>
+
+            <div class="perfil">
+                <span>✧</span>
+                <span>Paciente</span>
+            </div>
         </header>
+
         <section class="secao">
+            <p class="subtitulo">SEGURANÇA E ACOLHIMENTO</p>
             <h1>Um espaço seguro e acolhedor.</h1>
-            <article class="card">
-                <h3>Privacidade</h3>
-                <p>As informações compartilhadas no Equilibrium devem ser tratadas com cuidado e respeito.</p>
-                <h3>Precisa conversar?</h3>
-                <p>Use a navegação para encontrar profissionais e acompanhar seu espaço pessoal.</p>
-                <a asp-controller="Home" asp-action="Index">Voltar ao início →</a>
-            </article>
+            <p>Conheça nossas orientações de privacidade e saiba como encontrar apoio dentro da plataforma.</p>
+
+            <div class="cards">
+                <article class="card">
+                    <h3>Privacidade</h3>
+                    <p>As informações compartilhadas no Equilibrium devem ser tratadas com cuidado, responsabilidade e respeito.</p>
+                </article>
+
+                <article class="card">
+                    <h3>Precisa conversar?</h3>
+                    <p>Você pode utilizar a plataforma para encontrar profissionais e acompanhar seu espaço pessoal.</p>
+                    <a asp-controller="Home" asp-action="Profissionais">Encontrar profissionais →</a>
+                </article>
+
+                <article class="card">
+                    <h3>Voltar ao início</h3>
+                    <p>Retorne à página inicial para continuar navegando pelo Equilibrium.</p>
+                    <a asp-controller="Home" asp-action="Index">Voltar ao início →</a>
+                </article>
+            </div>
         </section>
     </main>
 </div>

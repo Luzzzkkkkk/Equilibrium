@@ -239,4 +239,4 @@ C:\Users\giovanna60895976\OneDrive - SENAC-SC\Documentos\GitHub\PI_Final\Equilib
 C:\Users\giovanna60895976\OneDrive - SENAC-SC\Documentos\GitHub\PI_Final\Equilibrium\obj\Debug\net10.0\Equilibr.27AEA72E.Up2Date
 C:\Users\giovanna60895976\OneDrive - SENAC-SC\Documentos\GitHub\PI_Final\Equilibrium\obj\Debug\net10.0\compressed\aglnla38z9-{0}-e576z46jw5-e576z46jw5.gz
 C:\Users\giovanna60895976\OneDrive - SENAC-SC\Documentos\GitHub\PI_Final\Equilibrium\obj\Debug\net10.0\compressed\cxvnj88j77-{0}-e576z46jw5-e576z46jw5.gz
-C:\Users\giovanna60895976\OneDrive - SENAC-SC\Documentos\GitHub\PI_Final\Equilibrium\obj\Debug\net10.0\compressed\b4a9x8qoif-{0}-fxok3s7etz-fxok3s7etz.gz
+C:\Users\giovanna60895976\OneDrive - SENAC-SC\Documentos\GitHub\PI_Final\Equilibrium\obj\Debug\net10.0\compressed\b4a9x8qoif-{0}-vtdu1cnulm-vtdu1cnulm.gz

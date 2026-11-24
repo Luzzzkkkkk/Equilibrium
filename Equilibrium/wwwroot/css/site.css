@@ -159,6 +159,16 @@ a:hover {
     min-width: 0;
 }
 
+/* As páginas internas usam a mesma estrutura: cabeçalho, seção e cards. */
+.secao {
+    width: min(100%, 1180px);
+    margin-inline: auto;
+}
+
+.secao > .card {
+    margin-bottom: 22px;
+}
+
 .topo {
     display: flex;
     align-items: center;
@@ -343,6 +353,7 @@ a:hover {
 .card form {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
     gap: 10px 14px;
     margin-top: 16px;
 }
@@ -378,6 +389,23 @@ a:hover {
     border: 0;
     font: inherit;
     cursor: pointer;
+}
+
+.card form .botao {
+    min-height: 42px;
+    padding: 10px 18px;
+}
+
+.card form input::placeholder {
+    color: #999987;
+}
+
+.cards > .card {
+    min-width: 0;
+}
+
+.cards > .card h3:first-child {
+    margin-top: 0;
 }
 
 .dashboard .conteudo > footer {
@@ -494,6 +522,10 @@ a {
     .cards {
         grid-template-columns: 1fr;
     }
+
+    .topo h2 {
+        font-size: 22px;
+    }
 }
 
 @media (max-width: 560px) {
@@ -547,5 +579,13 @@ a {
 
     .card form {
         grid-template-columns: 1fr;
+    }
+
+    .card form label {
+        margin-bottom: -6px;
+    }
+
+    .card form button {
+        margin-top: 4px;
     }
 }
