@@ -30,6 +30,20 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
                         </li>
                     </ul>
+                    <div class="d-flex gap-2 align-items-center py-2">
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <span class="text-muted small">Olá, @User.Identity.Name</span>
+                            <form asp-controller="Conta" asp-action="Sair" method="post">
+                                <button class="btn btn-outline-secondary btn-sm" type="submit">Sair</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <a class="btn btn-outline-secondary btn-sm" asp-controller="Conta" asp-action="Login">Entrar</a>
+                            <a class="btn btn-primary btn-sm" asp-controller="Conta" asp-action="Cadastro">Criar conta</a>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>

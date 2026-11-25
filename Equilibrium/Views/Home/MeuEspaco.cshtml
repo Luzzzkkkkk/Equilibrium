@@ -1,18 +1,47 @@
 @{
     ViewData["Title"] = "Meu espaço";
-    ViewData["PaginaAtiva"] = "MeuEspaco";
+    ViewData["PaginaAtiva"] = "| eu Espaco";
 }
+
 <div class="dashboard">
     <partial name="_Sidebar" />
+
     <main class="conteudo">
-        <header class="topo"><div><p>SEU ESPAÇO DE ACOLHIMENTO</p><h2>Meu espaço</h2></div><div class="perfil"><span>✧</span><span>Paciente</span></div></header>
+        <header class="topo">
+            <div>
+                <p>SEU ESPAÇO DE ACOLHIMENTO</p>
+                <h2>Meu espaço</h2>
+            </div>
+
+            <div class="perfil">
+                <span>✧</span>
+                <span>Paciente</span>
+            </div>
+        </header>
+
         <section class="secao">
-            <h1>Seu espaço pessoal</h1>
-            <p>Aqui você pode acessar os recursos de cuidado do Equilibrium.</p>
+            <p class="subtitulo">SEU CUIDADO PESSOAL</p>
+            <h1>Seu espaço pessoal.</h1>
+            <p>Acesse seus recursos de cuidado, acompanhe seu bem-estar e encontre apoio profissional.</p>
+
             <div class="cards">
-                <article class="card"><h3>Meu bem-estar</h3><p>Acompanhe seu momento emocional com calma.</p><a asp-action="BemEstar">Acessar →</a></article>
-                <article class="card"><h3>Minhas consultas</h3><p>Veja sua área de consultas e atendimentos.</p><a asp-action="Consultas">Acessar →</a></article>
-                <article class="card"><h3>Profissionais</h3><p>Encontre opções de apoio profissional.</p><a asp-action="Profissionais">Encontrar →</a></article>
+                <article class="card">
+                    <h3>Meu bem-estar</h3>
+                    <p>Acompanhe seu momento emocional com calma e atenção.</p>
+                    <a asp-controller="Home" asp-action="BemEstar">Acessar →</a>
+                </article>
+
+                <article class="card">
+                    <h3>Minhas consultas</h3>
+                    <p>Consulte seus agendamentos e acompanhe seus atendimentos.</p>
+                    <a asp-controller="Home" asp-action="Consultas">Acessar →</a>
+                </article>
+
+                <article class="card">
+                    <h3>Profissionais</h3>
+                    <p>Encontre profissionais e conheça as opções de apoio disponíveis.</p>
+                    <a asp-controller="Home" asp-action="Profissionais">Encontrar →</a>
+                </article>
             </div>
         </section>
     </main>

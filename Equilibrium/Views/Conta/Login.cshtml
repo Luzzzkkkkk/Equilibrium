@@ -1,0 +1,22 @@
+@model LoginViewModel
+@{ ViewData["Title"] = "Entrar"; }
+<section class="auth-page">
+    <div class="auth-card">
+        <a class="auth-brand" asp-controller="Home" asp-action="Index">Equilibrium</a>
+        <p class="auth-eyebrow">SEU ESPAÇO DE ACOLHIMENTO</p>
+        <h1>Que bom ter você de volta.</h1>
+        <p class="auth-intro">Entre para continuar cuidando de você.</p>
+        @if (TempData["Mensagem"] is string mensagem) { <div class="auth-alert success">@mensagem</div> }
+        <div asp-validation-summary="ModelOnly" class="auth-alert"></div>
+        <form asp-action="Login" method="post" class="auth-form">
+            <label asp-for="Email"></label><input asp-for="Email" autocomplete="email" />
+            <span asp-validation-for="Email" class="field-error"></span>
+            <label asp-for="Senha"></label><input asp-for="Senha" autocomplete="current-password" />
+            <span asp-validation-for="Senha" class="field-error"></span>
+            <button type="submit" class="auth-button">Entrar</button>
+        </form>
+        <a class="auth-help" asp-action="EsqueciSenha">Esqueci minha senha</a>
+        <p class="auth-switch">Ainda não tem conta? <a asp-action="Cadastro">Cadastre-se</a></p>
+    </div>
+</section>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

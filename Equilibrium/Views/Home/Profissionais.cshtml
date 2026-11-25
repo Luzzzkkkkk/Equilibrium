@@ -2,6 +2,7 @@
     ViewData["Title"] = "Profissionais";
     ViewData["PaginaAtiva"] = "Profissionais";
 }
+@model IEnumerable<Medico>
 
 <div class="dashboard">
     <partial name="_Sidebar" />
@@ -29,8 +30,8 @@
                     <label for="especialidade">Especialidade</label>
                     <select id="especialidade" name="especialidade">
                         <option value="">Todas</option>
-                        <option value="Psicologia">Psicologia</option>
-                        <option value="Psiquiatria">Psiquiatria</option>
+                        <option value="Psicologia" selected="@(ViewBag.Especialidade as string == "Psicologia")">Psicologia</option>
+                        <option value="Psiquiatria" selected="@(ViewBag.Especialidade as string == "Psiquiatria")">Psiquiatria</option>
                     </select>
 
                     <label for="genero">Gênero</label>
@@ -50,6 +51,21 @@
                     <button class="botao" type="submit">Buscar</button>
                 </form>
             </article>
+
+            <div class="cards">
+                @if (!Model.Any())
+                {
+                    <article class="card"><h3>Nenhum profissional encontrado</h3><p>Cadastre médicos na tabela medicos para exibi-los aqui.</p></article>
+                }
+                @foreach (var medico in Model)
+                {
+                    <article class="card">
+                        <h3>@medico.Nome</h3>
+                        <p>@medico.Especialidade</p>
+                        <p>CRM: @medico.CRM</p>
+                    </article>
+                }
+            </div>
         </section>
     </main>
 </div>
