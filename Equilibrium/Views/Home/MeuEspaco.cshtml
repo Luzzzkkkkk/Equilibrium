@@ -1,6 +1,7 @@
+@model Paciente
 @{
     ViewData["Title"] = "Meu espaço";
-    ViewData["PaginaAtiva"] = "| eu Espaco";
+    ViewData["PaginaAtiva"] = "MeuEspaco";
 }
 
 <div class="dashboard">
@@ -15,14 +16,23 @@
 
             <div class="perfil">
                 <span>✧</span>
-                <span>Paciente</span>
+                <span>@Model.Nome</span>
             </div>
         </header>
 
         <section class="secao">
             <p class="subtitulo">SEU CUIDADO PESSOAL</p>
             <h1>Seu espaço pessoal.</h1>
-            <p>Acesse seus recursos de cuidado, acompanhe seu bem-estar e encontre apoio profissional.</p>
+            <p>Olá, @Model.Nome. Acesse seus recursos de cuidado e encontre apoio profissional.</p>
+
+            <article class="card">
+                <h3>Seus dados</h3>
+                <p><strong>E-mail:</strong> @Model.Email</p>
+                <p><strong>Idade:</strong> @Model.Idade anos</p>
+                <p><strong>Telefone:</strong> @(string.IsNullOrWhiteSpace(Model.Telefone) ? "Não informado" : Model.Telefone)</p>
+                <p><strong>Endereço:</strong> @(string.IsNullOrWhiteSpace(Model.Endereco) ? "Não informado" : Model.Endereco)</p>
+                <a asp-controller="Home" asp-action="Configuracoes">Acessar configurações →</a>
+            </article>
 
             <div class="cards">
                 <article class="card">

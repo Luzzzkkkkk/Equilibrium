@@ -10,9 +10,14 @@ public class Prontuario
 
     public Prontuario() { }
 
-    public Prontuario(Paciente paciente, string observacoes, DateTime dataAtendimento)
+    public Prontuario(
+        Paciente paciente, 
+        string observacoes, 
+        DateTime dataAtendimento
+    )
+
     {
-        Paciente = paciente;
+        Paciente = paciente ?? throw new ArgumentNullException(nameof(paciente));
         PacienteId = paciente.Id;
         Observacoes = observacoes;
         DataAtendimento = dataAtendimento;

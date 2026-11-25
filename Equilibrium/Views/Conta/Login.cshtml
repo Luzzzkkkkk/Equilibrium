@@ -9,6 +9,7 @@
         @if (TempData["Mensagem"] is string mensagem) { <div class="auth-alert success">@mensagem</div> }
         <div asp-validation-summary="ModelOnly" class="auth-alert"></div>
         <form asp-action="Login" method="post" class="auth-form">
+            <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
             <label asp-for="Email"></label><input asp-for="Email" autocomplete="email" />
             <span asp-validation-for="Email" class="field-error"></span>
             <label asp-for="Senha"></label><input asp-for="Senha" autocomplete="current-password" />

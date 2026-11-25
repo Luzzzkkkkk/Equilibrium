@@ -8,8 +8,14 @@ public class Medico : Usuarios
     // Necessário para materialização pelo Entity Framework Core.
     public Medico() { }
 
-    public Medico(string nome, string cpf, string email, string senha, string crm, string especialidade)
-        : base(nome, cpf, email, senha)
+    public Medico(
+        string nome,
+        string cpf,
+        string email,
+        string senha,
+        string crm,
+        string especialidade
+        ) : base(nome, cpf, email, senha)
     {
         Tipo = "Medico";
         CRM = crm;

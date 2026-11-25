@@ -1,3 +1,4 @@
+@model Paciente
 @{
     ViewData["Title"] = "Configurações";
     ViewData["PaginaAtiva"] = "Configuracoes";
@@ -5,10 +6,21 @@
 <div class="dashboard">
     <partial name="_Sidebar" />
     <main class="conteudo">
-        <header class="topo"><div><p>SEU ESPAÇO, DO SEU JEITO</p><h2>Configurações</h2></div><div class="perfil"><span>✧</span><span>Paciente</span></div></header>
+        <header class="topo"><div><p>SEU ESPAÇO, DO SEU JEITO</p><h2>Configurações</h2></div><div class="perfil"><span>✧</span><span>@Model.Nome</span></div></header>
         <section class="secao">
-            <h1>Preferências e privacidade</h1>
-            <article class="card"><h3>Privacidade e suporte</h3><p>Consulte as informações de privacidade e encontre orientações para navegar pelo Equilibrium.</p><a asp-action="Privacy">Ver informações →</a></article>
+            <h1>Seus dados pessoais</h1>
+            @if (TempData["Mensagem"] is string mensagem) { <p class="auth-alert success">@mensagem</p> }
+            @if (TempData["Erro"] is string erro) { <p class="auth-alert">@erro</p> }
+            <article class="card">
+                <form method="post" asp-action="AtualizarPerfil">
+                    <label for="nome">Nome</label><input id="nome" name="nome" value="@Model.Nome" maxlength="100" required />
+                    <label for="idade">Idade</label><input id="idade" name="idade" type="number" value="@Model.Idade" min="1" max="120" required />
+                    <label for="telefone">Telefone</label><input id="telefone" name="telefone" value="@Model.Telefone" maxlength="20" />
+                    <label for="endereco">Endereço</label><input id="endereco" name="endereco" value="@Model.Endereco" maxlength="200" />
+                    <button type="submit" class="botao">Salvar alterações</button>
+                </form>
+            </article>
+            <article class="card"><h3>Privacidade e suporte</h3><p>Consulte informações de privacidade e orientações para navegar pelo Equilibrium.</p><a asp-action="Privacy">Ver informações →</a><p><a asp-controller="Conta" asp-action="EsqueciSenha">Redefinir minha senha</a></p></article>
         </section>
     </main>
 </div>

@@ -24,28 +24,13 @@
             <article class="card">
                 <h3>Buscar profissionais</h3>
                 <form method="get" asp-controller="Home" asp-action="Profissionais">
-                    <label for="regiao">Região</label>
-                    <input type="text" id="regiao" name="regiao" placeholder="Digite sua região" />
-
                     <label for="especialidade">Especialidade</label>
                     <select id="especialidade" name="especialidade">
-                        <option value="">Todas</option>
-                        <option value="Psicologia" selected="@(ViewBag.Especialidade as string == "Psicologia")">Psicologia</option>
-                        <option value="Psiquiatria" selected="@(ViewBag.Especialidade as string == "Psiquiatria")">Psiquiatria</option>
-                    </select>
-
-                    <label for="genero">Gênero</label>
-                    <select id="genero" name="genero">
-                        <option value="">Todos</option>
-                        <option value="Feminino">Feminino</option>
-                        <option value="Masculino">Masculino</option>
-                    </select>
-
-                    <label for="disponibilidade">Disponibilidade</label>
-                    <select id="disponibilidade" name="disponibilidade">
-                        <option value="">Todas</option>
-                        <option value="Online">Online</option>
-                        <option value="Presencial">Presencial</option>
+                        <option value="" selected="@(string.IsNullOrWhiteSpace(ViewBag.Especialidade as string))">Todas</option>
+                        @foreach (string especialidade in (IEnumerable<string>)ViewBag.Especialidades)
+                        {
+                            <option value="@especialidade" selected="@(string.Equals(ViewBag.Especialidade as string, especialidade, StringComparison.OrdinalIgnoreCase))">@especialidade</option>
+                        }
                     </select>
 
                     <button class="botao" type="submit">Buscar</button>

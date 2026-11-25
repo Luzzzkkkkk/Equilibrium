@@ -5,53 +5,126 @@ namespace Equilibrium.Data;
 
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+    public AppDbContext(DbContextOptions<AppDbContext> options)
+        : base(options)
+    {
+    }
 
     public DbSet<Usuarios> Usuarios => Set<Usuarios>();
     public DbSet<Paciente> Pacientes => Set<Paciente>();
     public DbSet<Medico> Medicos => Set<Medico>();
+    public DbSet<Administrador> Administradores => Set<Administrador>();
     public DbSet<Prontuario> Prontuarios => Set<Prontuario>();
+    public DbSet<Consulta> Consultas => Set<Consulta>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
+        // HERANÇA TPT
+        modelBuilder.Entity<Usuarios>()
+            .UseTptMappingStrategy()
+            .ToTable("usuarios");
+
+        modelBuilder.Entity<Paciente>().ToTable("pacientes");
+        modelBuilder.Entity<Medico>().ToTable("medicos");
+        modelBuilder.Entity<Administrador>().ToTable("administradores");
+
+        // USUÁRIOS
         modelBuilder.Entity<Usuarios>(entity =>
         {
-            entity.ToTable("usuarios");
             entity.HasKey(u => u.Id);
-            entity.Property(u => u.Id).HasColumnName("id");
-            entity.Property(u => u.Nome).HasColumnName("nome").HasMaxLength(100).IsRequired();
-            entity.Property(u => u.CPF).HasColumnName("cpf").HasMaxLength(14);
-            entity.Property(u => u.Email).HasColumnName("email").HasMaxLength(100).IsRequired();
-            entity.Property(u => u.Senha).HasColumnName("senha").HasMaxLength(255).IsRequired();
-            entity.Property(u => u.Tipo).HasColumnName("tipo").HasMaxLength(10).IsRequired();
-            entity.HasIndex(u => u.CPF).IsUnique();
+
+            entity.Property(u => u.Nome)
+                .HasMaxLength(100).IsRequired();
+
+            entity.Property(u => u.CPF)
+                .HasMaxLength(14);
+
+            entity.Property(u => u.Email)
+                .HasMaxLength(100).IsRequired();
+
+            entity.Property(u => u.Senha)
+                .HasMaxLength(255).IsRequired();
+
+            entity.Property(u => u.Tipo)
+                .HasMaxLength(20).IsRequired();
+
             entity.HasIndex(u => u.Email).IsUnique();
+            entity.HasIndex(u => u.CPF).IsUnique();
         });
 
-        // Herança TPT: os dados comuns ficam em usuarios; os específicos,
-        // em pacientes/medicos, ligados pela coluna usuario_id.
-        modelBuilder.Entity<Paciente>().ToTable("pacientes");
-        modelBuilder.Entity<Paciente>().Property(p => p.Id).HasColumnName("usuario_id");
-        modelBuilder.Entity<Paciente>().Property(p => p.Idade).HasColumnName("idade");
-        modelBuilder.Entity<Paciente>().Property(p => p.Telefone).HasColumnName("telefone").HasMaxLength(20);
-        modelBuilder.Entity<Paciente>().Property(p => p.Endereco).HasColumnName("endereco").HasMaxLength(200);
+        // PACIENTES
+        modelBuilder.Entity<Paciente>(entity =>
+        {
+            entity.Property(p => p.Idade).IsRequired();
+            entity.Property(p => p.Telefone).HasMaxLength(20);
+            entity.Property(p => p.Endereco).HasMaxLength(200);
+        });
 
-        modelBuilder.Entity<Medico>().ToTable("medicos");
-        modelBuilder.Entity<Medico>().Property(m => m.Id).HasColumnName("usuario_id");
-        modelBuilder.Entity<Medico>().Property(m => m.CRM).HasColumnName("crm").HasMaxLength(30).IsRequired();
-        modelBuilder.Entity<Medico>().Property(m => m.Especialidade).HasColumnName("especialidade").HasMaxLength(100).IsRequired();
-        modelBuilder.Entity<Medico>().HasIndex(m => m.CRM).IsUnique();
+        // MÉDICOS
+        modelBuilder.Entity<Medico>(entity =>
+        {
+            entity.Property(m => m.CRM)
+                .HasMaxLength(30).IsRequired();
 
+            entity.Property(m => m.Especialidade)
+                .HasMaxLength(100).IsRequired();
+
+            entity.HasIndex(m => m.CRM).IsUnique();
+        });
+
+        // ADMINISTRADORES
+        modelBuilder.Entity<Administrador>(entity =>
+        {
+            entity.Property(a => a.NivelAcesso)
+                .HasMaxLength(50).IsRequired();
+        });
+
+        // PRONTUÁRIOS
         modelBuilder.Entity<Prontuario>(entity =>
         {
             entity.ToTable("prontuarios");
-            entity.Property(p => p.Id).HasColumnName("id");
-            entity.Property(p => p.PacienteId).HasColumnName("paciente_id");
-            entity.Property(p => p.Observacoes).HasColumnName("observacoes").HasColumnType("text").IsRequired();
-            entity.Property(p => p.DataAtendimento).HasColumnName("data_atendimento").HasColumnType("date");
-            entity.HasOne(p => p.Paciente).WithMany(p => p.Prontuarios)
-                .HasForeignKey(p => p.PacienteId).HasPrincipalKey(p => p.Id)
+
+            entity.HasKey(p => p.Id);
+
+            entity.Property(p => p.Observacoes)
+                .HasColumnType("text").IsRequired();
+
+            entity.Property(p => p.DataAtendimento)
+                .HasColumnType("datetime").IsRequired();
+
+            entity.HasOne(p => p.Paciente)
+                .WithMany(p => p.Prontuarios)
+                .HasForeignKey(p => p.PacienteId)
                 .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // CONSULTAS
+        modelBuilder.Entity<Consulta>(entity =>
+        {
+            entity.ToTable("consultas");
+
+            entity.HasKey(c => c.Id);
+
+            entity.Property(c => c.Status)
+                .HasMaxLength(20).IsRequired();
+
+            entity.Property(c => c.Observacoes)
+                .HasMaxLength(500);
+
+            entity.HasOne(c => c.Paciente)
+                .WithMany()
+                .HasForeignKey(c => c.PacienteId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            entity.HasOne(c => c.Medico)
+                .WithMany()
+                .HasForeignKey(c => c.MedicoId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            entity.HasIndex(c => new { c.MedicoId, c.DataHora })
+                .IsUnique();
         });
     }
 }
