@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using Equilibrium.Models;
 
-public class Sistema
+public class SistemaService
 {
     private List<Paciente> pacientes = new List<Paciente>();
     private List<Medico> medicos = new List<Medico>();
 
-    public Sistema()
+    public SistemaService()
     {
         // Paciente de exemplo
         Paciente paciente = new Paciente(

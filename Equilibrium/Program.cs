@@ -46,7 +46,7 @@ builder.Services.AddAuthorization(options =>
         policy.RequireRole("Admin"));
 });
 
-var app = builder.Build();
+// var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
 {
@@ -62,9 +62,15 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+<<<<<<< HEAD
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}"
 );
 
 app.Run();
+=======
+app.Run();
+
+Console.WriteLine("Hello, World!"); 
+>>>>>>> 0e65b663b89c84fbdee89006b24ac1d7e933ffd3
