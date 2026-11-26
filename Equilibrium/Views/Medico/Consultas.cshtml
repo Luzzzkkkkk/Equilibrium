@@ -1,0 +1,45 @@
+@model IEnumerable<Consulta>
+@{
+    ViewData["Title"] = "Minha agenda";
+}
+<section class="auth-page">
+    <div class="auth-card auth-card-wide">
+        <a class="auth-brand" asp-controller="Medico" asp-action="Index">Equilibrium</a>
+        <p class="auth-eyebrow">ÁREA DO PROFISSIONAL</p>
+        <h1>Consultas agendadas</h1>
+        <p class="auth-intro">Esta lista mostra somente consultas agendadas com você.</p>
+
+        @if (!Model.Any())
+        {
+            <article class="card"><h2>Nenhuma consulta agendada</h2><p>Quando houver agendamentos, eles aparecerão nesta página.</p></article>
+        }
+        @foreach (var consulta in Model)
+        {
+            <article class="card mb-3">
+                <h2>@consulta.Paciente.Nome</h2>
+                <p><strong>Idade:</strong> @consulta.Paciente.Idade anos</p>
+                <p><strong>CPF:</strong> @DadosPessoais.MascararCpf(consulta.Paciente.CPF)</p>
+                <p><strong>Telefone:</strong> @DadosPessoais.MascararTelefone(consulta.Paciente.Telefone)</p>
+                <p><strong>Consulta:</strong> @consulta.DataHora.ToString("dddd, dd/MM/yyyy 'às' HH:mm", new System.Globalization.CultureInfo("pt-BR"))</p>
+                <p><strong>Status:</strong> @consulta.Status</p>
+
+                @if (consulta.Status == "Pendente" || consulta.Status == "Confirmada")
+                {
+                    <form asp-action="AtualizarStatus" method="post" class="d-flex gap-2 align-items-end flex-wrap">
+                        <input type="hidden" name="id" value="@consulta.Id" />
+                        <div>
+                            <label for="status-@consulta.Id">Atualizar status</label>
+                            <select id="status-@consulta.Id" name="status" class="form-select">
+                                <option value="Confirmada">Confirmada</option>
+                                <option value="Realizada">Realizada</option>
+                                <option value="Cancelada">Cancelada</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </form>
+                }
+            </article>
+        }
+        <p class="auth-switch"><a asp-action="Index">Voltar ao início</a></p>
+    </div>
+</section>

@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Agendar consulta";
+}
+<section class="auth-page">
+    <div class="auth-card">
+        <a class="auth-brand" asp-controller="Home" asp-action="MeuEspaco">Equilibrium</a>
+        <p class="auth-eyebrow">CUIDADO E ACOLHIMENTO</p>
+        <h1>Agende sua consulta.</h1>
+        <p class="auth-intro">Escolha o profissional e um horário futuro.</p>
+        <div asp-validation-summary="ModelOnly" class="auth-alert"></div>
+        <form asp-controller="Paciente" asp-action="Agendar" method="post" class="auth-form">
+            <label for="medicoId">Profissional</label>
+            <select id="medicoId" name="medicoId" asp-items="ViewBag.Medicos" required>
+                <option value="">Selecione um profissional</option>
+            </select>
+            <label for="dataHora">Data e horário</label>
+            <input id="dataHora" name="dataHora" type="datetime-local" required />
+            <button type="submit" class="auth-button">Solicitar consulta</button>
+        </form>
+        <p class="auth-switch"><a asp-controller="Home" asp-action="Consultas">Voltar para consultas</a></p>
+    </div>
+</section>

@@ -1,35 +1,38 @@
+@model IEnumerable<Consulta>
 @{
     ViewData["Title"] = "Minhas consultas";
     ViewData["PaginaAtiva"] = "Consultas";
 }
-
 <div class="dashboard">
     <partial name="_Sidebar" />
-
     <main class="conteudo">
-        <header class="topo">
-            <div>
-                <p>SEU ESPAÇO DE ACOLHIMENTO</p>
-                <h2>Minhas consultas</h2>
-            </div>
-
-            <div class="perfil">
-                <span>✧</span>
-                <span>Paciente</span>
-            </div>
-        </header>
-
+        <header class="topo"><div><p>ACOMPANHE SEU CUIDADO</p><h2>Minhas consultas</h2></div><div class="perfil"><span>@User.Identity?.Name</span></div></header>
         <section class="secao">
-            <p class="subtitulo">ACOMPANHE SEU CUIDADO</p>
             <h1>Seus horários, em um só lugar.</h1>
             <p>Acompanhe seus agendamentos e organize seus próximos atendimentos.</p>
-
+            @if (TempData["Mensagem"] is string mensagem) { <p class="auth-alert success">@mensagem</p> }
+            <a class="botao" asp-controller="Paciente" asp-action="Agendar">Agendar consulta</a>
             <div class="cards">
-                <article class="card">
-                    <h3>Nenhuma consulta cadastrada</h3>
-                    <p>Quando houver um agendamento, você poderá acompanhar as informações da sua consulta por aqui.</p>
-                    <a asp-controller="Home" asp-action="Profissionais">Encontrar profissionais →</a>
-                </article>
+                @if (!Model.Any())
+                {
+                    <article class="card"><h3>Nenhuma consulta cadastrada</h3><p>Quando você agendar, os detalhes aparecerão aqui.</p></article>
+                }
+                @foreach (var consulta in Model)
+                {
+                    <article class="card">
+                        <h3>@consulta.Medico.Nome</h3>
+                        <p>@consulta.Medico.Especialidade</p>
+                        <p><strong>Data:</strong> @consulta.DataHora.ToString("dd/MM/yyyy 'às' HH:mm")</p>
+                        <p><strong>Status:</strong> @consulta.Status</p>
+                        @if (consulta.Status != "Realizada" && consulta.Status != "Cancelada")
+                        {
+                            <form asp-controller="Paciente" asp-action="Cancelar" method="post">
+                                <input type="hidden" name="id" value="@consulta.Id" />
+                                <button class="botao" type="submit">Cancelar consulta</button>
+                            </form>
+                        }
+                    </article>
+                }
             </div>
         </section>
     </main>

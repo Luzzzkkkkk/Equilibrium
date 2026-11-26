@@ -1,12 +1,14 @@
 using Equilibrium.Data;
 using Equilibrium.Models;
-using Equilibrium.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
 
 namespace Equilibrium.Controllers;
 
@@ -14,13 +16,16 @@ public class ContaController : Controller
 {
     private readonly AppDbContext _context;
     private readonly IPasswordHasher<Usuarios> _hasher;
+    private readonly IDataProtector _resetProtector;
 
     public ContaController(
         AppDbContext context,
-        IPasswordHasher<Usuarios> hasher)
+        IPasswordHasher<Usuarios> hasher,
+        IDataProtectionProvider protectionProvider)
     {
         _context = context;
         _hasher = hasher;
+        _resetProtector = protectionProvider.CreateProtector("Equilibrium.PasswordReset.v1");
     }
 
     [HttpGet]
@@ -37,6 +42,8 @@ public class ContaController : Controller
             return View(model);
 
         string email = model.Email.Trim().ToLower();
+        string cpf = DadosPessoais.SomenteNumeros(model.CPF);
+        string telefone = DadosPessoais.SomenteNumeros(model.Telefone);
 
         if (await _context.Usuarios.AnyAsync(u => u.Email == email))
         {
@@ -44,8 +51,7 @@ public class ContaController : Controller
             return View(model);
         }
 
-        if (!string.IsNullOrWhiteSpace(model.CPF) &&
-            await _context.Usuarios.AnyAsync(u => u.CPF == model.CPF))
+        if (await _context.Usuarios.AnyAsync(u => u.CPF == cpf))
         {
             ModelState.AddModelError("CPF", "Este CPF já está cadastrado.");
             return View(model);
@@ -53,12 +59,12 @@ public class ContaController : Controller
 
         var paciente = new Paciente(
             model.Nome.Trim(),
-            model.CPF,
+            cpf,
             email,
             "",
             model.Idade,
-            model.Telefone,
-            model.Endereco
+            telefone,
+            model.Endereco ?? string.Empty
         );
 
         paciente.Tipo = "Paciente";
@@ -131,11 +137,60 @@ public class ContaController : Controller
 
         return usuario.Tipo switch
         {
-            "Paciente" => RedirectToAction("Index", "Paciente"),
+            "Paciente" => RedirectToAction("MeuEspaco", "Home"),
             "Medico" => RedirectToAction("Index", "Medico"),
             "Admin" => RedirectToAction("Index", "Admin"),
             _ => RedirectToAction("Login")
         };
+    }
+
+    [HttpGet]
+    public IActionResult EsqueciSenha() => View();
+
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> EsqueciSenha(SolicitarRedefinicaoViewModel model)
+    {
+        if (!ModelState.IsValid) return View(model);
+
+        var email = model.Email.Trim().ToLowerInvariant();
+        var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
+        TempData["Mensagem"] = "Se o e-mail estiver cadastrado, as instruções estarão disponíveis aqui.";
+        if (usuario is not null)
+        {
+            var payload = $"{usuario.Email}|{DateTimeOffset.UtcNow.ToUnixTimeSeconds()}";
+            var token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(_resetProtector.Protect(payload)));
+            TempData["LinkDesenvolvimento"] = Url.Action(nameof(RedefinirSenha), "Conta", new { token, email = usuario.Email }, Request.Scheme);
+        }
+        return View();
+    }
+
+    [HttpGet]
+    public IActionResult RedefinirSenha(string email, string token) => View(new RedefinirSenhaViewModel { Email = email, Token = token });
+
+    [HttpPost, ValidateAntiForgeryToken]
+    public async Task<IActionResult> RedefinirSenha(RedefinirSenhaViewModel model)
+    {
+        if (!ModelState.IsValid) return View(model);
+        try
+        {
+            var protectedValue = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(model.Token));
+            var payload = _resetProtector.Unprotect(protectedValue).Split('|');
+            if (payload.Length != 2 || !string.Equals(payload[0], model.Email, StringComparison.OrdinalIgnoreCase) ||
+                DateTimeOffset.UtcNow - DateTimeOffset.FromUnixTimeSeconds(long.Parse(payload[1])) > TimeSpan.FromMinutes(30))
+                throw new InvalidOperationException();
+        }
+        catch
+        {
+            ModelState.AddModelError(string.Empty, "Este link expirou ou não é válido. Solicite outro.");
+            return View(model);
+        }
+
+        var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == model.Email);
+        if (usuario is null) return NotFound();
+        usuario.Senha = _hasher.HashPassword(usuario, model.NovaSenha);
+        await _context.SaveChangesAsync();
+        TempData["Mensagem"] = "Senha alterada. Entre com sua nova senha.";
+        return RedirectToAction(nameof(Login));
     }
 
     [HttpPost]

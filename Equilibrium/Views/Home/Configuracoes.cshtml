@@ -15,7 +15,7 @@
                 <form method="post" asp-action="AtualizarPerfil">
                     <label for="nome">Nome</label><input id="nome" name="nome" value="@Model.Nome" maxlength="100" required />
                     <label for="idade">Idade</label><input id="idade" name="idade" type="number" value="@Model.Idade" min="1" max="120" required />
-                    <label for="telefone">Telefone</label><input id="telefone" name="telefone" value="@Model.Telefone" maxlength="20" />
+                    <label for="telefone">Telefone</label><input id="telefone" name="telefone" value="@Model.Telefone" inputmode="tel" placeholder="(00) 00000-0000" data-mask="telefone" maxlength="15" />
                     <label for="endereco">Endereço</label><input id="endereco" name="endereco" value="@Model.Endereco" maxlength="200" />
                     <button type="submit" class="botao">Salvar alterações</button>
                 </form>

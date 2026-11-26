@@ -9,10 +9,10 @@
         <div asp-validation-summary="ModelOnly" class="auth-alert"></div>
         <form asp-action="Cadastro" method="post" class="auth-form auth-grid">
             <div><label asp-for="Nome"></label><input asp-for="Nome" autocomplete="name" /><span asp-validation-for="Nome" class="field-error"></span></div>
-            <div><label asp-for="CPF"></label><input asp-for="CPF" inputmode="numeric" placeholder="000.000.000-00" /><span asp-validation-for="CPF" class="field-error"></span></div>
+            <div><label asp-for="CPF"></label><input asp-for="CPF" inputmode="numeric" placeholder="000.000.000-00" data-mask="cpf" maxlength="14" /><span asp-validation-for="CPF" class="field-error"></span></div>
             <div class="full"><label asp-for="Email"></label><input asp-for="Email" autocomplete="email" /><span asp-validation-for="Email" class="field-error"></span></div>
             <div><label asp-for="Idade"></label><input asp-for="Idade" type="number" min="1" max="120" /><span asp-validation-for="Idade" class="field-error"></span></div>
-            <div><label asp-for="Telefone"></label><input asp-for="Telefone" autocomplete="tel" /><span asp-validation-for="Telefone" class="field-error"></span></div>
+            <div><label asp-for="Telefone"></label><input asp-for="Telefone" autocomplete="tel" inputmode="tel" placeholder="(00) 00000-0000" data-mask="telefone" maxlength="15" /><span asp-validation-for="Telefone" class="field-error"></span></div>
             <div class="full"><label asp-for="Endereco"></label><input asp-for="Endereco" autocomplete="street-address" /><span asp-validation-for="Endereco" class="field-error"></span></div>
             <div><label asp-for="Senha"></label><input asp-for="Senha" autocomplete="new-password" /><span asp-validation-for="Senha" class="field-error"></span></div>
             <div><label asp-for="ConfirmarSenha"></label><input asp-for="ConfirmarSenha" autocomplete="new-password" /><span asp-validation-for="ConfirmarSenha" class="field-error"></span></div>

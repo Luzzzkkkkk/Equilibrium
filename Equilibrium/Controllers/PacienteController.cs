@@ -41,7 +41,7 @@ public class PacienteController : Controller
             .OrderBy(c => c.DataHora)
             .ToListAsync();
 
-        return View(consultas);
+        return View("~/Views/Home/Consultas.cshtml", consultas);
     }
 
     [HttpGet]
@@ -79,17 +79,22 @@ public class PacienteController : Controller
             return View();
         }
 
+        var inicioDoDia = dataHora.Date;
+        var fimDoDia = inicioDoDia.AddDays(1);
+        var inicioDaJanela = dataHora.AddMinutes(-45);
+        var fimDaJanela = dataHora.AddMinutes(45);
+
         bool horarioOcupado = await _context.Consultas.AnyAsync(c =>
-            c.MedicoId == medicoId &&
-            c.DataHora == dataHora &&
-            c.Status != "Cancelada"
-        );
+            c.Status != "Cancelada" &&
+            c.DataHora >= inicioDoDia && c.DataHora < fimDoDia &&
+            c.DataHora >= inicioDaJanela && c.DataHora <= fimDaJanela &&
+            (c.MedicoId == medicoId || c.PacienteId == UsuarioId));
 
         if (horarioOcupado)
         {
             ModelState.AddModelError(
                 "",
-                "Este horário não está disponível."
+                "Há uma consulta sua ou deste profissional em horário próximo (até 45 minutos). Escolha outro horário."
             );
 
             await CarregarMedicos();
@@ -121,9 +126,17 @@ public class PacienteController : Controller
             return View();
         }
 
-        TempData["Mensagem"] = "Solicitação de consulta enviada!";
+        return RedirectToAction(nameof(AgendamentoConcluido), new { id = consulta.Id });
+    }
 
-        return RedirectToAction("Consultas");
+    [HttpGet]
+    public async Task<IActionResult> AgendamentoConcluido(int id)
+    {
+        var consulta = await _context.Consultas
+            .Include(c => c.Medico)
+            .FirstOrDefaultAsync(c => c.Id == id && c.PacienteId == UsuarioId);
+
+        return consulta is null ? NotFound() : View(consulta);
     }
 
     [HttpPost]
@@ -145,6 +158,7 @@ public class PacienteController : Controller
         consulta.Status = "Cancelada";
 
         await _context.SaveChangesAsync();
+        TempData["Mensagem"] = "Consulta cancelada.";
 
         return RedirectToAction("Consultas");
     }

@@ -1,0 +1,33 @@
+@model IEnumerable<Medico>
+@{
+    ViewData["Title"] = "Gerenciar profissionais";
+}
+<section class="auth-page">
+    <div class="auth-card auth-card-wide">
+        <a class="auth-brand" asp-controller="Admin" asp-action="Index">Equilibrium</a>
+        <p class="auth-eyebrow">ÁREA ADMINISTRATIVA</p>
+        <h1>Profissionais</h1>
+        @if (TempData["Mensagem"] is string mensagem) { <p class="auth-alert success">@mensagem</p> }
+        @if (TempData["Erro"] is string erro) { <p class="auth-alert">@erro</p> }
+        <p><a class="auth-button" asp-action="NovoProfissional">Cadastrar profissional</a></p>
+        @if (!Model.Any())
+        {
+            <article class="card"><p>Nenhum profissional cadastrado.</p></article>
+        }
+        @foreach (var medico in Model)
+        {
+            <article class="card mb-3">
+                <h2>@medico.Nome</h2>
+                <p><strong>Especialidade:</strong> @medico.Especialidade</p>
+                <p><strong>CRM:</strong> @medico.CRM</p>
+                <p><strong>CPF:</strong> @DadosPessoais.MascararCpf(medico.CPF)</p>
+                <p><strong>E-mail:</strong> @medico.Email</p>
+                <form asp-action="ExcluirProfissional" method="post" onsubmit="return confirm('Deseja excluir este profissional?');">
+                    <input type="hidden" name="id" value="@medico.Id" />
+                    <button class="btn btn-outline-danger" type="submit">Excluir profissional</button>
+                </form>
+            </article>
+        }
+        <p class="auth-switch"><a asp-action="Index">Voltar ao painel</a></p>
+    </div>
+</section>

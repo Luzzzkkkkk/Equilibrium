@@ -1,0 +1,23 @@
+@model CadastroProfissionalViewModel
+@{
+    ViewData["Title"] = "Novo profissional";
+}
+<section class="auth-page">
+    <div class="auth-card auth-card-wide">
+        <a class="auth-brand" asp-controller="Admin" asp-action="Index">Equilibrium</a>
+        <p class="auth-eyebrow">ÁREA ADMINISTRATIVA</p>
+        <h1>Cadastrar profissional</h1>
+        <div asp-validation-summary="ModelOnly" class="auth-alert"></div>
+        <form asp-action="NovoProfissional" method="post" class="auth-form auth-grid">
+            <div><label asp-for="Nome"></label><input asp-for="Nome" autocomplete="name" /><span asp-validation-for="Nome" class="field-error"></span></div>
+            <div><label asp-for="CPF"></label><input asp-for="CPF" inputmode="numeric" autocomplete="off" placeholder="000.000.000-00" data-mask="cpf" /><span asp-validation-for="CPF" class="field-error"></span></div>
+            <div class="full"><label asp-for="Email"></label><input asp-for="Email" autocomplete="email" /><span asp-validation-for="Email" class="field-error"></span></div>
+            <div><label asp-for="CRM"></label><input asp-for="CRM" /><span asp-validation-for="CRM" class="field-error"></span></div>
+            <div><label asp-for="Especialidade"></label><input asp-for="Especialidade" /><span asp-validation-for="Especialidade" class="field-error"></span></div>
+            <div class="full"><label asp-for="Senha"></label><input asp-for="Senha" autocomplete="new-password" /><span asp-validation-for="Senha" class="field-error"></span></div>
+            <button type="submit" class="auth-button full">Salvar profissional</button>
+        </form>
+        <p class="auth-switch"><a asp-action="Profissionais">Cancelar e voltar</a></p>
+    </div>
+</section>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

@@ -28,8 +28,9 @@
             <article class="card">
                 <h3>Seus dados</h3>
                 <p><strong>E-mail:</strong> @Model.Email</p>
+                <p><strong>CPF:</strong> @DadosPessoais.MascararCpf(Model.CPF)</p>
                 <p><strong>Idade:</strong> @Model.Idade anos</p>
-                <p><strong>Telefone:</strong> @(string.IsNullOrWhiteSpace(Model.Telefone) ? "Não informado" : Model.Telefone)</p>
+                <p><strong>Telefone:</strong> @DadosPessoais.MascararTelefone(Model.Telefone)</p>
                 <p><strong>Endereço:</strong> @(string.IsNullOrWhiteSpace(Model.Endereco) ? "Não informado" : Model.Endereco)</p>
                 <a asp-controller="Home" asp-action="Configuracoes">Acessar configurações →</a>
             </article>

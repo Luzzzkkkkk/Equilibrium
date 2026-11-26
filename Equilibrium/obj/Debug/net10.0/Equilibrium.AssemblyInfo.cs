@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Equilibrium")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e58b7fbfe1b0945cb586203a123c849362860bc8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dbe3acda73df46f59ff9d7815020626270be4641")]
 [assembly: System.Reflection.AssemblyProductAttribute("Equilibrium")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Equilibrium")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
