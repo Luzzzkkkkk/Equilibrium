@@ -22,7 +22,7 @@
                 <p><strong>CRM:</strong> @medico.CRM</p>
                 <p><strong>CPF:</strong> @DadosPessoais.MascararCpf(medico.CPF)</p>
                 <p><strong>E-mail:</strong> @medico.Email</p>
-                <form asp-action="ExcluirProfissional" method="post" onsubmit="return confirm('Deseja excluir este profissional?');">
+                <form asp-action="ExcluirProfissional" method="post" onsubmit="return confirm('Deseja excluir este profissional? As consultas realizadas e canceladas vinculadas também serão removidas.');">
                     <input type="hidden" name="id" value="@medico.Id" />
                     <button class="btn btn-outline-danger" type="submit">Excluir profissional</button>
                 </form>

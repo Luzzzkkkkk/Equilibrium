@@ -72,12 +72,21 @@ public class AdminController : Controller
         var medico = await _context.Medicos.FindAsync(id);
         if (medico is null) return NotFound();
 
-        if (await _context.Consultas.AnyAsync(c => c.MedicoId == id))
+        var consultas = await _context.Consultas
+            .Where(c => c.MedicoId == id)
+            .ToListAsync();
+        var statusEncerrados = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
-            TempData["Erro"] = "Este profissional tem consultas vinculadas. Cancele ou remova essas consultas antes de excluí-lo.";
+            "Realizada",
+            "Cancelada"
+        };
+        if (consultas.Any(c => !statusEncerrados.Contains(c.Status?.Trim() ?? string.Empty)))
+        {
+            TempData["Erro"] = "N\u00e3o \u00e9 poss\u00edvel excluir este profissional enquanto houver consultas pendentes ou confirmadas.";
             return RedirectToAction(nameof(Profissionais));
         }
 
+        _context.Consultas.RemoveRange(consultas);
         _context.Medicos.Remove(medico);
         await _context.SaveChangesAsync();
         TempData["Mensagem"] = "Profissional excluído.";
